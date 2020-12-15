@@ -66,7 +66,46 @@ function addItem(e) {
       displayAlert("please enter value", "danger");
     }
   }
-
-// LOCAL Storage
-
-// SETUP ITEMS
+// display alert
+function displayAlert(text, action) {
+    alert.textContent = text;
+    alert.classList.add(`alert-${action}`);
+    // remove alert
+    setTimeout(function () {
+      alert.textContent = "";
+      alert.classList.remove(`alert-${action}`);
+    }, 1000);
+  }
+  
+  // clear items
+  function clearItems() {
+    const items = document.querySelectorAll(".grocery-item");
+    if (items.length > 0) {
+      items.forEach(function (item) {
+        list.removeChild(item);
+      });
+    }
+    container.classList.remove("show-container");
+    displayAlert("empty list", "danger");
+    setBackToDefault();
+    localStorage.removeItem("list");
+  }
+  
+  // delete item
+  
+  function deleteItem(e) {
+    const element = e.currentTarget.parentElement.parentElement;
+    const id = element.dataset.id;
+  
+    list.removeChild(element);
+  
+    if (list.children.length === 0) {
+      container.classList.remove("show-container");
+    }
+    displayAlert("item removed", "danger");
+  
+    setBackToDefault();
+    // remove from local storage
+    removeFromLocalStorage(id);
+  }
+  
