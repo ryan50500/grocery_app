@@ -13,7 +13,11 @@ let editFlag = false;
 let editID = "";
 // EVENT LISTENERS
 // submit form
-form.addEventListener('submit', addItem)
+form.addEventListener("submit", addItem);
+// clear list
+clearBtn.addEventListener("click", clearItems);
+// display items onload
+window.addEventListener("DOMContentLoaded", setupItems);
 // FUNCTIONS
 // add item
 function addItem(e) {
